@@ -1,0 +1,38 @@
+﻿@model MeteologyEntity.Models.Settings
+@{
+    ViewBag.Title = "Настройки";
+}
+
+<h2>Настройки</h2>
+
+<form class="form-horizontal">
+    <div class="form-group">
+        <label for="Groza_FTP_host" class="col-sm-2 control-label">Сервер:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="Groza_FTP_host" name="Groza_FTP_host" value="@Model.Groza_FTP_host" disabled>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="Groza_FTP_user" class="col-sm-2 control-label">Пользователь:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="Groza_FTP_user" name="Groza_FTP_user" value="@Model.Groza_FTP_user" disabled>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <label for="Groza_FTP_pass" class="col-sm-2 control-label">Пароль:</label>
+        <div class="col-sm-10">
+            <input type="text" class="form-control" id="Groza_FTP_pass" name="Groza_FTP_pass" value="@Model.Groza_FTP_pass" disabled>
+        </div>
+    </div>
+
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            @Html.ActionLink("Редактировать", "Edit", new { id = Model.ID })
+        </div>
+    </div>
+</form>

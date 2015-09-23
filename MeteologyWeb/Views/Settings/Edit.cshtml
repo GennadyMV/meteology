@@ -1,0 +1,46 @@
+﻿@model MeteologyEntity.Models.Settings
+
+@{
+    ViewBag.Title = "Настройки";
+}
+
+
+@using (Html.BeginForm("Edit", "Settings", new { ReturnUrl = ViewBag.ReturnUrl },
+            FormMethod.Post, new { @class = "form-horizontal" }))
+{
+    <div class="panel panel-default">
+        <div class="panel-heading">Настройки FTP сервера с данными от грозопеленгатора</div>
+        <div class="panel-body">
+
+            <div class="form-group">
+                <label for="Groza_FTP_host" class="col-sm-2 control-label">Сервер:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="Groza_FTP_host" name="Groza_FTP_host" value="@Model.Groza_FTP_host">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Groza_FTP_user" class="col-sm-2 control-label">Пользователь:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="Groza_FTP_user" name="Groza_FTP_user" value="@Model.Groza_FTP_user">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="Groza_FTP_pass" class="col-sm-2 control-label">Пароль:</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="Groza_FTP_pass" name="Groza_FTP_pass" value="@Model.Groza_FTP_pass">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <button type="submit" class="btn btn-default">Сохранить</button>
+        </div>
+    </div>
+}
+

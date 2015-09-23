@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<hibernate-mapping xmlns="urn:nhibernate-mapping-2.2" namespace="MeteologyEntity.Models" assembly="MeteologyEntity">
+  <class name="Settings" table="Meteology_Settings">
+    <id name="ID" unsaved-value="0">
+      <column name="ID" not-null="true" />
+      <generator class="identity"/>
+    </id>
+    
+    <property name="Groza_FTP_host" />
+    <property name="Groza_FTP_user" />
+    <property name="Groza_FTP_pass" />
+  </class>
+</hibernate-mapping>
