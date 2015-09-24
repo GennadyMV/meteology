@@ -13,11 +13,13 @@ namespace MeteologyEntity.Models
         public virtual string Groza_FTP_host { get; set; }
         public virtual string Groza_FTP_user { get; set; }
         public virtual string Groza_FTP_pass { get; set; }
+        public virtual string Forecast_Folder { get; set; }
         public Settings()
         {
             Groza_FTP_host = "";
             Groza_FTP_user = "";
             Groza_FTP_pass = "";
+            Forecast_Folder = "";
 
         }
         public virtual void Save()

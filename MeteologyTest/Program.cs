@@ -1,5 +1,6 @@
 ﻿using MeteologyCore.Groza;
 using MeteologyCore.Logger;
+using MeteologyEntity.Helper;
 using MeteologyEntity.Models;
 using System;
 using System.Collections.Generic;
@@ -15,10 +16,32 @@ namespace MeteologyTest
         static void Main(string[] args)
         {
             UpdateSchema();
-            FTP_connect();
+            //FTP_connect();
             //Groza_parser();
+            RemoteAccessFolder();
             Console.WriteLine("Ok");
             Console.ReadLine();
+        }
+        static void RemoteAccessFolder()
+        {
+            //string fileName = @"\\10.8.5.123\obmen\ForWWW\geo\2015_09_23\wrf-arw\khv\1AmurOs_HBRK15.txt";
+            //string fileName = @"\\10.8.2.40\rhm\operative\forecasts\2015_09_23\wrf-arw\khv\1AmurOs_HBRK15.txt";
+            DateTime currDate = DateTime.Now;
+            Settings theSetting = Settings.Get();
+
+            string fileName = theSetting.Forecast_Folder + "\\" + currDate.ToString("yyyy_MM_dd") + "\\wrf-arw\\khv\\1AmurOs_HBRK15.txt";
+
+                
+            Console.WriteLine(fileName);
+            try
+            {
+                Console.WriteLine(Helper.readFileAsUtf8(fileName));
+            }
+            catch(Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                Console.WriteLine(ex.StackTrace);
+            }
         }
         static void Groza_parser()
         {

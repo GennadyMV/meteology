@@ -9,5 +9,6 @@
     <property name="Groza_FTP_host" />
     <property name="Groza_FTP_user" />
     <property name="Groza_FTP_pass" />
+    <property name="Forecast_Folder" />
   </class>
 </hibernate-mapping>

@@ -1,0 +1,48 @@
+﻿@model MeteologyWebForecast.Models.View_AmurOsHBRK15
+@{
+    ViewBag.Title = "Прогноз средних пятидневных сумм осадков по бассейнам р.Амур";
+}
+
+@if (ViewBag.Error != null)
+{
+    <h2>@ViewBag.Error</h2>
+}
+else
+{ 
+    
+    <h2>@Model.Title</h2>
+    
+    <table class="table">
+        <thead>
+            <tr>                
+                <th>Бассейн</th>
+                <th>I 5дн.</th>
+                <th>II 5дн.</th>
+                <th>III 5дн.</th>
+                <th>IV 5дн.</th>
+                <th>V 5дн.</th>
+                <th>VI 5дн.</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in Model.Basseins)
+            {
+                <tr>
+                    <td>
+                        @item.Name
+                    </td>
+                    <td>@item.ShowFive(@item.five01)</td>
+                    <td>@item.ShowFive(@item.five02)</td>
+                    <td>@item.ShowFive(@item.five03)</td>
+                    <td>@item.ShowFive(@item.five04)</td>
+                    <td>@item.ShowFive(@item.five05)</td>
+                    <td>@item.ShowFive(@item.five06)</td>
+                </tr>                
+            }
+        </tbody>
+    </table>
+
+    <p>
+        @Model.Comment
+    </p>
+}

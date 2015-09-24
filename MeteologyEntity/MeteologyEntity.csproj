@@ -49,6 +49,7 @@
   <ItemGroup>
     <Compile Include="Common\IRepository.cs" />
     <Compile Include="Common\NHibernateHelper.cs" />
+    <Compile Include="Helper\Helper.cs" />
     <Compile Include="Models\Groza.cs" />
     <Compile Include="Models\Settings.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

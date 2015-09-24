@@ -58,15 +58,10 @@ namespace MeteologyeMediana.Controllers
             try
             {
                 // TODO: Add update logic here
-                string Groza_FTP_host = collection.Get("Groza_FTP_host");
-                string Groza_FTP_user = collection.Get("Groza_FTP_user");
-                string Groza_FTP_pass = collection.Get("Groza_FTP_pass");
-
+                string Forecast_Folder = collection.Get("Forecast_Folder");
                 Settings settings = Settings.Get();
 
-                settings.Groza_FTP_host = Groza_FTP_host;
-                settings.Groza_FTP_user = Groza_FTP_user;
-                settings.Groza_FTP_pass = Groza_FTP_pass;
+                settings.Forecast_Folder = Forecast_Folder;
 
                 IRepository<Settings> repo = new SettingsRepository();
                 repo.Update(settings);

@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteologyGrozaService", "Me
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteologyCore", "MeteologyCore\MeteologyCore.csproj", "{3C45755B-F645-47F3-979D-8674908C7239}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteologyWebForecast", "MeteologyWebForecast\MeteologyWebForecast.csproj", "{A6799BFB-8CEC-4104-9F60-BD2FF002B75F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MeteologyForecastService", "MeteologyForecastService\MeteologyForecastService.csproj", "{63637B56-2571-403B-8689-928DB87D0DCA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{3C45755B-F645-47F3-979D-8674908C7239}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3C45755B-F645-47F3-979D-8674908C7239}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{3C45755B-F645-47F3-979D-8674908C7239}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A6799BFB-8CEC-4104-9F60-BD2FF002B75F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A6799BFB-8CEC-4104-9F60-BD2FF002B75F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A6799BFB-8CEC-4104-9F60-BD2FF002B75F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A6799BFB-8CEC-4104-9F60-BD2FF002B75F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{63637B56-2571-403B-8689-928DB87D0DCA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{63637B56-2571-403B-8689-928DB87D0DCA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{63637B56-2571-403B-8689-928DB87D0DCA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{63637B56-2571-403B-8689-928DB87D0DCA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
