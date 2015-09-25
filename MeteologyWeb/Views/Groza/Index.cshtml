@@ -1,0 +1,150 @@
+﻿@model List<MeteologyEntity.Models.Groza>
+@{
+    ViewBag.Title = "Мониторинг грозовой активности в Амурской области";
+}
+
+<h2>Мониторинг грозовой активности в Амурской области</h2>
+
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/highcharts.js")
+
+<script src="http://code.highcharts.com/highcharts.js"></script>
+<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+}
+
+
+
+
+<p>
+    Широта: @Model.Where(x => x.Latitude != null).Min(x => x.Latitude).ToString("0.00")-@Model.Where(x => x.Latitude != null).Max(x => x.Latitude).ToString("0.00")
+</p>
+
+<p>
+    Долгота: @Model.Where(x => x.Longitude != null).Min(x => x.Longitude).ToString("0.00")-@Model.Where(x => x.Longitude != null).Max(x => x.Longitude).ToString("0.00")
+</p>
+
+<p>
+    Количество: @Model.Count()-@ViewBag.CountCountrolLong - @ViewBag.CountCountrolLat
+</p>
+
+
+<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<div id="containerLat" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+<script>
+    $(function () {
+        $('#container').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Долготные вариации количества грозовых разрядов'
+            },
+            subtitle: {
+                text: 'По данным грозопеленгаторов для Амурской области'
+            },
+            xAxis: {
+                allowDecimals: false,
+                labels: {
+                    formatter: function () {
+                        return this.value / 10; 
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Nuclear weapon states'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value ;
+                    }
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name} produced <b>{point.y}</b><br/>warheads in {point.x}'
+            },
+            plotOptions: {
+                area: {
+                    pointStart: @ViewBag.SeriesLongMin,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'USA',
+                data: @ViewBag.SeriesLong
+            }]
+        });
+    });
+</script>
+
+
+
+<script>
+    $(function () {
+        $('#containerLat').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Широтные вариации количества грозовых разрядов'
+            },
+            subtitle: {
+                text: 'По данным грозопеленгаторов для Амурской области'
+            },
+            xAxis: {
+                allowDecimals: false,
+                labels: {
+                    formatter: function () {
+                        return this.value / 10;
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Nuclear weapon states'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value ;
+                    }
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name} produced <b>{point.y}</b><br/>warheads in {point.x}'
+            },
+            plotOptions: {
+                area: {
+                    pointStart: @ViewBag.SeriesLatMin,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'USA',
+                data: @ViewBag.SeriesLat
+            }]
+        });
+    });
+</script>
