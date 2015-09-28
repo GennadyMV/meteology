@@ -34,6 +34,8 @@
 
 <div id="containerLat" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
+<div id="containerSumLong" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<div id="containerSumLat" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 <script>
     $(function () {
@@ -144,6 +146,126 @@
             series: [{
                 name: 'USA',
                 data: @ViewBag.SeriesLat
+            }]
+        });
+    });
+</script>
+
+
+<script>
+    $(function () {
+        $('#containerSumLong').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Долготные вариации суммы интенсивности грозовых разрядов'
+            },
+            subtitle: {
+                text: 'По данным грозопеленгаторов для Амурской области'
+            },
+            xAxis: {
+                allowDecimals: false,
+                labels: {
+                    formatter: function () {
+                        return this.value / 10;
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Nuclear weapon states'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value ;
+                    }
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name} produced <b>{point.y}</b><br/>warheads in {point.x}'
+            },
+            plotOptions: {
+                area: {
+                    pointStart: @ViewBag.SeriesSumLongMin,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Положительная',
+                data: @ViewBag.SeriesSumLongPlus
+            },{
+                name: 'Отрицательная',
+                data: @ViewBag.SeriesSumLongMinus
+            }]
+        });
+    });
+</script>
+
+
+<script>
+    $(function () {
+        $('#containerSumLat').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Широтные вариации суммы интенсивности грозовых разрядов'
+            },
+            subtitle: {
+                text: 'По данным грозопеленгаторов для Амурской области'
+            },
+            xAxis: {
+                allowDecimals: false,
+                labels: {
+                    formatter: function () {
+                        return this.value / 10;
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Nuclear weapon states'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value ;
+                    }
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name} produced <b>{point.y}</b><br/>warheads in {point.x}'
+            },
+            plotOptions: {
+                area: {
+                    pointStart: @ViewBag.SeriesSumLatMin,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Положительная',
+                data: @ViewBag.SeriesSumLatPlus
+            },{
+                name: 'Отрицательная',
+                data: @ViewBag.SeriesSumLatMinus
             }]
         });
     });
