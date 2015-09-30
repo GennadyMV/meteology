@@ -96,10 +96,80 @@ namespace MeteologyWeb.Controllers
             ViewBag.SeriesSumLatMin = (int)(theGrozes.Min(x => x.Latitude) * 10);
             ViewBag.ControlSeriesSumLat = countSeriesSumLatPlus;
 
+            string theCountSut = "";
+            for (int i = 1; i <= 24; i++)
+            {
+                int count = theGrozes.Where(x => x.fixed_at.Hour == i - 1).Count();
+                theCountSut += count.ToString() +",";
+            }
+            theCountSut = theCountSut.TrimEnd(trims);
+            theCountSut = "[" + theCountSut + "]";
+            ViewBag.CountSut = theCountSut;
 
+            string theSumSutMinus = "";
+            string theSumSutPlus = "";
+            for (int i = 1; i <= 24; i++ )
+            {
+                int sumMinus = theGrozes.Where(x => x.fixed_at.Hour == i - 1).Where(x => x.Intensity < 0).Sum(x => x.Intensity);
+                int sumPlus = theGrozes.Where(x => x.fixed_at.Hour == i - 1).Where(x => x.Intensity > 0).Sum(x => x.Intensity);
+                theSumSutMinus += sumMinus.ToString() + ",";
+                theSumSutPlus += sumPlus.ToString() + ",";
+            }
+            theSumSutMinus = "[" + theSumSutMinus.TrimEnd(trims) + "]";
+            theSumSutPlus = "[" + theSumSutPlus.TrimEnd(trims) + "]";
 
+            ViewBag.SumSutMinus = theSumSutMinus;
+            ViewBag.SumSutPlus = theSumSutPlus;
+
+            string theScatter = "";
+            string theScatterMinus = "";
+            string theScatterPlus = "";
+            foreach (var item in theGrozes)
+            {
+                theScatter += "[" + item.Latitude.ToString().Replace(",", ".") + ", " + item.Longitude.ToString().Replace(",", ".") + "], ";
+                if (item.Intensity < 0)
+                {
+                    theScatterMinus += "[" + item.Latitude.ToString().Replace(",", ".") + ", " + item.Longitude.ToString().Replace(",", ".") + "], ";
+                }
+                else
+                {
+                    theScatterPlus += "[" + item.Latitude.ToString().Replace(",", ".") + ", " + item.Longitude.ToString().Replace(",", ".") + "], ";
+                }
+            }
+            theScatter = "[" + theScatter.TrimEnd(trims) + "]";
+            theScatterMinus = "[" + theScatterMinus.TrimEnd(trims) + "]";
+            theScatterPlus = "[" + theScatterPlus.TrimEnd(trims) + "]";
+            ViewBag.Scatter = theScatter;
+            ViewBag.ScatterMinus = theScatterMinus;
+            ViewBag.ScatterPlus = theScatterPlus;
             return View(theGrozes);
         }
 
+        public ActionResult Map(int YYYY = -1, int MM = -1, int DD = -1)
+        {
+            DateTime currDate;
+            try
+            {
+                currDate = new DateTime(YYYY, MM, DD);
+            }
+            catch
+            {
+                currDate = DateTime.Now;
+            }
+
+            ViewBag.currDate = currDate;
+
+            DateTime dateBgn = new DateTime(currDate.Year,
+                currDate.Month,
+                currDate.Day,
+                0,0,0);
+            DateTime dateEnd = new DateTime(currDate.Year,
+                currDate.Month,
+                currDate.Day,
+                23,59,0);
+            List<Groza> theGrozes = Groza.GetByPeriod(dateBgn, dateEnd);
+
+            return View(theGrozes);
+        }
     }
 }

@@ -30,12 +30,170 @@
 </p>
 
 
+<div id="containerScatter" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<div id="containerScatterMinusPlus" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
 <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 <div id="containerLat" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
 <div id="containerSumLong" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 <div id="containerSumLat" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<div id="containerCountSut" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+<div id="containerSumSut" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+<script>
+$(function () {
+    $('#containerScatterMinusPlus').highcharts({
+        chart: {
+            type: 'scatter',
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'Height Versus Weight of 507 Individuals by Gender'
+        },
+        subtitle: {
+            text: 'Source: Heinz  2003'
+        },
+        xAxis: {
+            title: {
+                enabled: true,
+                text: 'Height (cm)'
+            },
+            startOnTick: true,
+            endOnTick: true,
+            showLastLabel: true
+        },
+        yAxis: {
+            title: {
+                text: 'Weight (kg)'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 100,
+            y: 70,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+            borderWidth: 1
+        },
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: 'rgb(100,100,100)'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: '{point.x} cm, {point.y} kg'
+                }
+            }
+        },
+        series: [{
+            name: 'Положительная',
+            color: 'rgba(223, 83, 83, .5)',
+            data: @ViewBag.ScatterPlus
+
+            }, {
+                name: 'Отрицательная',
+                color: 'rgba(119, 152, 191, .9)',
+                data: @ViewBag.ScatterMinus
+
+            }]
+    });
+});
+
+</script>
+<script>
+$(function () {
+    $('#containerScatter').highcharts({
+        chart: {
+            type: 'scatter',
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'Height Versus Weight of 507 Individuals by Gender'
+        },
+        subtitle: {
+            text: 'Source: Heinz  2003'
+        },
+        xAxis: {
+            title: {
+                enabled: true,
+                text: 'Height (cm)'
+            },
+            startOnTick: true,
+            endOnTick: true,
+            showLastLabel: true
+        },
+        yAxis: {
+            title: {
+                text: 'Weight (kg)'
+            }
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 100,
+            y: 70,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+            borderWidth: 1
+        },
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 5,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: 'rgb(100,100,100)'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: '{point.x} cm, {point.y} kg'
+                }
+            }
+        },
+        series: [{
+            name: 'Female',
+            color: 'rgba(223, 83, 83, .5)',
+            data: @ViewBag.Scatter
+
+        }]
+    });
+});
+
+</script>
 
 <script>
     $(function () {
@@ -266,6 +424,123 @@
             },{
                 name: 'Отрицательная',
                 data: @ViewBag.SeriesSumLatMinus
+            }]
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $('#containerCountSut').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Суточный ход количества грозовых разрядов'
+            },
+            subtitle: {
+                text: 'По данным грозопеленгаторов для Амурской области'
+            },
+            xAxis: {
+                allowDecimals: false,
+                labels: {
+                    formatter: function () {
+                        return this.value;
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Nuclear weapon states'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value ;
+                    }
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name} produced <b>{point.y}</b><br/>warheads in {point.x}'
+            },
+            plotOptions: {
+                area: {
+                    pointStart: 1,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'USA',
+                data: @ViewBag.CountSut
+            }]
+        });
+    });
+</script>
+
+
+
+<script>
+    $(function () {
+        $('#containerSumSut').highcharts({
+            chart: {
+                type: 'area'
+            },
+            title: {
+                text: 'Суточный ход суммы интенсивности грозовых разрядов'
+            },
+            subtitle: {
+                text: 'По данным грозопеленгаторов для Амурской области'
+            },
+            xAxis: {
+                allowDecimals: false,
+                labels: {
+                    formatter: function () {
+                        return this.value;
+                    }
+                }
+            },
+            yAxis: {
+                title: {
+                    text: 'Nuclear weapon states'
+                },
+                labels: {
+                    formatter: function () {
+                        return this.value ;
+                    }
+                }
+            },
+            tooltip: {
+                pointFormat: '{series.name} produced <b>{point.y}</b><br/>warheads in {point.x}'
+            },
+            plotOptions: {
+                area: {
+                    pointStart: 1,
+                    marker: {
+                        enabled: false,
+                        symbol: 'circle',
+                        radius: 2,
+                        states: {
+                            hover: {
+                                enabled: true
+                            }
+                        }
+                    }
+                }
+            },
+            series: [{
+                name: 'Положительная',
+                data: @ViewBag.SumSutPlus
+            },{
+                name: 'Отрицательная',
+                data: @ViewBag.SumSutMinus
             }]
         });
     });

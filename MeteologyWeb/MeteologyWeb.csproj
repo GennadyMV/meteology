@@ -235,6 +235,8 @@
     <Content Include="Views\Settings\Edit.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Groza\Index.cshtml" />
+    <Content Include="Views\Groza\Map.cshtml" />
+    <Content Include="Views\Groza\_Menu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
