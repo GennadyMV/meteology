@@ -1,11 +1,10 @@
-﻿@if (ViewContext.Controller.ValueProvider.GetValue("action").RawValue != "Index")
-{
-
-    <li id="goto_next">
-        <a class="btn btn-default btn-lg" href="~/Groza/@(ViewContext.Controller.ValueProvider.GetValue("action").RawValue)?YYYY=@ViewBag.currDate.AddDays(-1).Year&MM=@ViewBag.currDate.AddDays(-1).Month&DD=@ViewBag.currDate.AddDays(-1).Day">Пред.</a>
-    </li>
-    <li id="goto_next">
-        <a class="btn btn-default btn-lg" href="~/Groza/@(ViewContext.Controller.ValueProvider.GetValue("action").RawValue)?YYYY=@ViewBag.currDate.AddDays(1).Year&MM=@ViewBag.currDate.AddDays(1).Month&DD=@ViewBag.currDate.AddDays(1).Day">След.</a>
-    </li>
-
+﻿
+@if(ViewBag.currDate != null)
+{ 
+        <li id="goto_next">
+            <a class="btn btn-default btn-lg" href="~/Groza/@(ViewContext.Controller.ValueProvider.GetValue("action").RawValue)?YYYY=@ViewBag.currDate.AddDays(-1).Year&MM=@ViewBag.currDate.AddDays(-1).Month&DD=@ViewBag.currDate.AddDays(-1).Day">Пред.</a>
+        </li>
+        <li id="goto_next">
+            <a class="btn btn-default btn-lg" href="~/Groza/@(ViewContext.Controller.ValueProvider.GetValue("action").RawValue)?YYYY=@ViewBag.currDate.AddDays(1).Year&MM=@ViewBag.currDate.AddDays(1).Month&DD=@ViewBag.currDate.AddDays(1).Day">След.</a>
+        </li>
 }

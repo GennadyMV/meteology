@@ -34,7 +34,7 @@ namespace MeteologyEntity.Models
             string tokenLongitude = tokens[4];
             string tokenIntensity = tokens[5];
 
-            int YYYY = Convert.ToInt32(file.Substring(0,2)) + 2000;
+            int YYYY = DateTime.Now.Year;
             int MM = Convert.ToInt32(tokenDDMM.Substring(2,2));
             int DD = Convert.ToInt32(tokenDDMM.Substring(0,2));
             int HH = Convert.ToInt32(tokenHHMIss.Substring(0,2));

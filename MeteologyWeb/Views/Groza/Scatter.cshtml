@@ -1,0 +1,171 @@
+﻿@{
+    ViewBag.Title = "Плотность грозовой активности за " + ViewBag.currDate.ToString("MM.yyyy");
+}
+
+@section Scripts
+{
+    @Scripts.Render("~/Scripts/highcharts.js")
+
+    <script src="http://code.highcharts.com/highcharts.js"></script>
+    <script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+}
+
+<h2>Плотность грозовой активности за - @ViewBag.currDate.ToString("MM.yyyy")</h2>
+
+<div id="containerScatter" style="min-width: 310px; height: 800px; margin: 0 auto"></div>
+
+<div id="containerScatterMinusPlus" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+
+
+<script>
+$(function () {
+    $('#containerScatterMinusPlus').highcharts({
+        chart: {
+            type: 'scatter',
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'Плотность грозовой активности за месяц:'
+        },
+        subtitle: {
+            text: ' @(ViewBag.currDate.ToString("MM.yyyy"))'
+        },
+        xAxis: {
+            title: {
+                enabled: true,
+                text: 'Широта'
+            },
+            startOnTick: true,
+            endOnTick: true,
+            showLastLabel: true
+        },
+        yAxis: {
+            title: {
+                text: 'Долгота  '
+            },
+            min:100,
+            tickPixelInterval: 10,
+            tickInterval: 10
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 100,
+            y: 70,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+            borderWidth: 1
+        },
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 3,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: 'rgb(100,100,100)'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: '{point.x} , {point.y} '
+                }
+            }
+        },
+        series: [{
+            name: 'Положительная',
+            color: 'rgba(223, 83, 83, .5)',
+            data: @ViewBag.ScatterPlus
+
+            }, {
+                name: 'Отрицательная',
+                color: 'rgba(119, 152, 191, .9)',
+                data: @ViewBag.ScatterMinus
+
+            }]
+    });
+});
+
+</script>
+<script>
+$(function () {
+    $('#containerScatter').highcharts({
+        chart: {
+            type: 'scatter',
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'Плотность грозовой активности за месяц'
+        },
+        subtitle: {
+            text: ' @(ViewBag.currDate.ToString("MM.yyyy"))'
+        },
+        xAxis: {
+            title: {
+                enabled: true,
+                text: 'Широта'
+            },
+            startOnTick: true,
+            endOnTick: true,
+            showLastLabel: true
+        },
+        yAxis: {
+            title: {
+                text: 'Долгота'
+            }
+
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 100,
+            y: 70,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+            borderWidth: 1
+        },
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 3,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: 'rgb(100,100,100)'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: '{point.x} cm, {point.y} kg'
+                }
+            }
+        },
+        series: [{
+            name: 'Грозоразряды все',
+            color: 'rgba(223, 83, 83, .5)',
+            data: @ViewBag.Scatter
+
+        }]
+    });
+});
+
+</script>

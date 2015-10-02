@@ -11,8 +11,11 @@ namespace MeteologyWeb.Controllers
     {
         //
         // GET: /Groza/
-
         public ActionResult Index()
+        {
+            return View();
+        }
+        public ActionResult Analize()
         {
             DateTime dateCurr = DateTime.Now;
             DateTime dateBgn = new DateTime(dateCurr.Year, dateCurr.Month, 1);
@@ -121,6 +124,30 @@ namespace MeteologyWeb.Controllers
             ViewBag.SumSutMinus = theSumSutMinus;
             ViewBag.SumSutPlus = theSumSutPlus;
 
+            return View(theGrozes);
+        }
+        public ActionResult Scatter(int YYYY = -1, int MM = -1, int DD = -1)
+        {
+
+            DateTime currDate;
+            try
+            {
+                currDate = new DateTime(YYYY, MM, DD);
+            }
+            catch
+            {
+                currDate = DateTime.Now;
+            }
+
+            ViewBag.currDate = currDate;
+
+            DateTime dateBgn = new DateTime(currDate.Year, currDate.Month, 1);
+            DateTime dateEnd = dateBgn.AddMonths(1);
+            List<Groza> theGrozes = Groza.GetByPeriod(dateBgn, dateEnd);
+
+            char[] trims = { ',' };
+
+
             string theScatter = "";
             string theScatterMinus = "";
             string theScatterPlus = "";
@@ -144,7 +171,6 @@ namespace MeteologyWeb.Controllers
             ViewBag.ScatterPlus = theScatterPlus;
             return View(theGrozes);
         }
-
         public ActionResult Map(int YYYY = -1, int MM = -1, int DD = -1)
         {
             DateTime currDate;
