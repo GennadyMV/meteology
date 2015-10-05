@@ -33,7 +33,7 @@ namespace MeteologyCore.Groza
                 {
                     theLogger.Log(item);
 
-                    if (MeteologyEntity.Models.Groza.GetByZOC(item).Count > 0)
+                    if (MeteologyEntity.Models.Groza.Groza.GetByZOC(item).Count > 0)
                     {
                         theLogger.Log("Count > 0");
                         continue;
@@ -46,7 +46,7 @@ namespace MeteologyCore.Groza
                     foreach (var line in File.ReadAllLines(fileTemp))
                     {
                         theLogger.Log(line);
-                        MeteologyEntity.Models.Groza theGroza = new MeteologyEntity.Models.Groza(item, line);
+                        MeteologyEntity.Models.Groza.Groza theGroza = new MeteologyEntity.Models.Groza.Groza(item, line);
 
                         theGroza.Save();
                     }

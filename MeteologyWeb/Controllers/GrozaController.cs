@@ -1,4 +1,4 @@
-﻿using MeteologyEntity.Models;
+﻿using MeteologyEntity.Models.Groza;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -169,6 +169,14 @@ namespace MeteologyWeb.Controllers
             ViewBag.Scatter = theScatter;
             ViewBag.ScatterMinus = theScatterMinus;
             ViewBag.ScatterPlus = theScatterPlus;
+
+            Dictionary<string, string> theStationsData = new Dictionary<string, string>();
+            foreach (var item in Station.GetAll())
+            {
+                theStationsData.Add(item.Name, 
+                    "[[" + item.Latitude.ToString().Replace(",", ".") + ", " + item.Longitude.ToString().Replace(",", ".") + "]] ");
+            }
+            ViewBag.StationsData = theStationsData;
             return View(theGrozes);
         }
         public ActionResult Map(int YYYY = -1, int MM = -1, int DD = -1)

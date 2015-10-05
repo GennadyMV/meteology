@@ -5,15 +5,15 @@ using System.Text;
 using NHibernate;
 using NHibernate.Criterion;
 using MeteologyEntity.Common;
-using MeteologyEntity.Models;
+using MeteologyEntity.Models.Groza;
 
-namespace MeteologyEntity.Repositories
+namespace MeteologyEntity.Repositories.Groza
 {
-    public class GrozaRepository : IRepository<Groza>
+    public class GrozaRepository : IRepository<MeteologyEntity.Models.Groza.Groza>
     {
         #region IRepository<Measurement> Members
 
-        void IRepository<Groza>.Save(Groza entity)
+        void IRepository<MeteologyEntity.Models.Groza.Groza>.Save(MeteologyEntity.Models.Groza.Groza entity)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
@@ -25,7 +25,7 @@ namespace MeteologyEntity.Repositories
             }
         }
 
-        void IRepository<Groza>.Update(Groza entity)
+        void IRepository<MeteologyEntity.Models.Groza.Groza>.Update(MeteologyEntity.Models.Groza.Groza entity)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
@@ -37,7 +37,7 @@ namespace MeteologyEntity.Repositories
             }
         }
 
-        void IRepository<Groza>.Delete(Groza entity)
+        void IRepository<MeteologyEntity.Models.Groza.Groza>.Delete(MeteologyEntity.Models.Groza.Groza entity)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
@@ -49,41 +49,41 @@ namespace MeteologyEntity.Repositories
             }
         }
 
-        Groza IRepository<Groza>.GetById(int id)
+        MeteologyEntity.Models.Groza.Groza IRepository<MeteologyEntity.Models.Groza.Groza>.GetById(int id)
         {
             using (ISession session = NHibernateHelper.OpenSession())
-                return session.CreateCriteria<Groza>().Add(Restrictions.Eq("ID", id)).UniqueResult<Groza>();
+                return session.CreateCriteria<MeteologyEntity.Models.Groza.Groza>().Add(Restrictions.Eq("ID", id)).UniqueResult<MeteologyEntity.Models.Groza.Groza>();
         }
 
-        IList<Groza> IRepository<Groza>.GetAll()
+        IList<MeteologyEntity.Models.Groza.Groza> IRepository<MeteologyEntity.Models.Groza.Groza>.GetAll()
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                ICriteria criteria = session.CreateCriteria(typeof(Groza));
+                ICriteria criteria = session.CreateCriteria(typeof(MeteologyEntity.Models.Groza.Groza));
                 criteria.AddOrder(Order.Desc("ID"));
-                return criteria.List<Groza>();
+                return criteria.List<MeteologyEntity.Models.Groza.Groza>();
             }
         }
 
-        public IList<Groza> GetByPeriod(DateTime dateBgn, DateTime dateEnd)
+        public IList<MeteologyEntity.Models.Groza.Groza> GetByPeriod(DateTime dateBgn, DateTime dateEnd)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                ICriteria criteria = session.CreateCriteria(typeof(Groza));
+                ICriteria criteria = session.CreateCriteria(typeof(MeteologyEntity.Models.Groza.Groza));
                 criteria.Add(Restrictions.Between("fixed_at", dateBgn, dateEnd));
                 criteria.AddOrder(Order.Desc("ID"));
-                return criteria.List<Groza>();
+                return criteria.List<MeteologyEntity.Models.Groza.Groza>();
             }
         }
 
-        public IList<Groza> GetByZOC(string ZOC)
+        public IList<MeteologyEntity.Models.Groza.Groza> GetByZOC(string ZOC)
         {
             using (ISession session = NHibernateHelper.OpenSession())
             {
-                ICriteria criteria = session.CreateCriteria(typeof(Groza));
+                ICriteria criteria = session.CreateCriteria(typeof(MeteologyEntity.Models.Groza.Groza));
                 criteria.Add(Restrictions.Eq("zoc", ZOC));
                 criteria.AddOrder(Order.Desc("ID"));
-                return criteria.List<Groza>();
+                return criteria.List<MeteologyEntity.Models.Groza.Groza>();
             }
         }
         #endregion

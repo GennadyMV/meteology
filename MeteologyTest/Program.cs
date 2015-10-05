@@ -2,6 +2,7 @@
 using MeteologyCore.Logger;
 using MeteologyEntity.Helper;
 using MeteologyEntity.Models;
+using MeteologyEntity.Models.Groza;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,16 @@ namespace MeteologyTest
             UpdateSchema();
             //FTP_connect();
             //Groza_parser();
-            RemoteAccessFolder();
+            //RemoteAccessFolder();
+            StationCreate();
             Console.WriteLine("Ok");
             Console.ReadLine();
+        }
+        static void StationCreate()
+        {
+            Station theStation = new Station();
+            theStation.Name = "Test";
+            theStation.Save();
         }
         static void RemoteAccessFolder()
         {
@@ -46,7 +54,7 @@ namespace MeteologyTest
         static void Groza_parser()
         {
             string _line = "!0309!001119 3249740 0514053 1304144  -488 23 2 0    3%%      ";
-            MeteologyEntity.Models.Groza theGroza = new MeteologyEntity.Models.Groza("1578", _line);
+            Groza theGroza = new MeteologyEntity.Models.Groza.Groza("1578", _line);
 
         }
         static void FTP_connect()
