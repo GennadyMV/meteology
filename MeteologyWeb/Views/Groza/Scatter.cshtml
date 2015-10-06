@@ -11,30 +11,30 @@
 
 }
 
-<h2>Плотность грозовой активности за - @ViewBag.currDate.ToString("MM.yyyy")</h2>
-
 <div id="containerScatter" style="min-width: 310px; height: 800px; margin: 0 auto"></div>
 
-<div id="containerScatterMinusPlus" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
 
+
+
+<div id="containerScatterPlus" style="min-width: 310px; height: 800px; margin: 0 auto"></div>
 
 <script>
 $(function () {
-    $('#containerScatterMinusPlus').highcharts({
+    $('#containerScatterPlus').highcharts({
         chart: {
             type: 'scatter',
             zoomType: 'xy'
         },
         title: {
-            text: 'Плотность грозовой активности за месяц:'
+            text: 'Плотность положительной грозовой активности за месяц  @(ViewBag.currDate.ToString("MM.yyyy"))'
         },
         subtitle: {
-            text: ' @(ViewBag.currDate.ToString("MM.yyyy"))'
+            text: 'По данным грозопеленгаторов в Амурской области: Благовещенск, Тында, Архара, Февральск, Экимчар'
         },
         xAxis: {
             title: {
                 enabled: true,
-                text: 'Широта'
+                text: 'Долгота'
             },
             startOnTick: true,
             endOnTick: true,
@@ -42,11 +42,9 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'Долгота  '
-            },
-            min:100,
-            tickPixelInterval: 10,
-            tickInterval: 10
+                text: 'Широта'
+            }
+
         },
         legend: {
             layout: 'vertical',
@@ -78,21 +76,32 @@ $(function () {
                 },
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br>',
-                    pointFormat: '{point.x} , {point.y} '
+                    pointFormat: 'Широта: {point.x}, Долгота: {point.y}'
                 }
             }
         },
         series: [{
-            name: 'Положительная',
+            name: 'Положительные грозоразряды',
             color: 'rgba(223, 83, 83, .5)',
             data: @ViewBag.ScatterPlus
 
-            }, {
-                name: 'Отрицательная',
-                color: 'rgba(119, 152, 191, .9)',
-                data: @ViewBag.ScatterMinus
+            },
+            @foreach(KeyValuePair<string, string> pair in ViewBag.StationsData)
+            {
+                <text>
+                        {
+                            marker: {
+                                radius:10
+                            },
+                            name: '@pair.Key',
+                            data: @pair.Value
 
-            }]
+                        },
+                </text>
+
+
+            }
+        ]
     });
 });
 
@@ -105,15 +114,15 @@ $(function () {
             zoomType: 'xy'
         },
         title: {
-            text: 'Плотность грозовой активности за месяц'
+            text: 'Плотность грозовой активности за месяц  @(ViewBag.currDate.ToString("MM.yyyy"))'
         },
         subtitle: {
-            text: ' @(ViewBag.currDate.ToString("MM.yyyy"))'
+            text: 'По данным грозопеленгаторов в Амурской области: Благовещенск, Тында, Архара, Февральск, Экимчар'
         },
         xAxis: {
             title: {
                 enabled: true,
-                text: 'Широта'
+                text: 'Долгота'
             },
             startOnTick: true,
             endOnTick: true,
@@ -121,7 +130,7 @@ $(function () {
         },
         yAxis: {
             title: {
-                text: 'Долгота'
+                text: 'Широта'
             }
 
         },
@@ -155,22 +164,18 @@ $(function () {
                 },
                 tooltip: {
                     headerFormat: '<b>{series.name}</b><br>',
-                    pointFormat: '{point.x} cm, {point.y} kg'
+                    pointFormat: 'Широта: {point.x}, Долгота: {point.y}'
                 }
             }
         },
         series: [{
-            name: 'Грозоразряды все',
+            name: 'Грозоразряды',
             color: 'rgba(223, 83, 83, .5)',
             data: @ViewBag.Scatter
 
             },
-            @{
-                var i = 0;
-            }
             @foreach(KeyValuePair<string, string> pair in ViewBag.StationsData)
             {
-                i++;
                 <text>
                         {
                             marker: {
@@ -189,3 +194,97 @@ $(function () {
 });
 
 </script>
+
+
+<div id="containerScatterMinus" style="min-width: 310px; height: 800px; margin: 0 auto"></div>
+
+<script>
+$(function () {
+    $('#containerScatterMinus').highcharts({
+        chart: {
+            type: 'scatter',
+            zoomType: 'xy'
+        },
+        title: {
+            text: 'Плотность отрицательной грозовой активности за месяц  @(ViewBag.currDate.ToString("MM.yyyy"))'
+        },
+        subtitle: {
+            text: 'По данным грозопеленгаторов в Амурской области: Благовещенск, Тында, Архара, Февральск, Экимчар'
+        },
+        xAxis: {
+            title: {
+                enabled: true,
+                text: 'Долгота'
+            },
+            startOnTick: true,
+            endOnTick: true,
+            showLastLabel: true
+        },
+        yAxis: {
+            title: {
+                text: 'Широта'
+            }
+
+        },
+        legend: {
+            layout: 'vertical',
+            align: 'left',
+            verticalAlign: 'top',
+            x: 100,
+            y: 70,
+            floating: true,
+            backgroundColor: (Highcharts.theme && Highcharts.theme.legendBackgroundColor) || '#FFFFFF',
+            borderWidth: 1
+        },
+        plotOptions: {
+            scatter: {
+                marker: {
+                    radius: 3,
+                    states: {
+                        hover: {
+                            enabled: true,
+                            lineColor: 'rgb(100,100,100)'
+                        }
+                    }
+                },
+                states: {
+                    hover: {
+                        marker: {
+                            enabled: false
+                        }
+                    }
+                },
+                tooltip: {
+                    headerFormat: '<b>{series.name}</b><br>',
+                    pointFormat: 'Широта: {point.x}, Долгота: {point.y}'
+                }
+            }
+        },
+        series: [{
+            name: 'Положительные грозоразряды',
+            color: 'rgba(119, 152, 191, .9)',
+            data: @ViewBag.ScatterMinus
+
+            },
+            @foreach(KeyValuePair<string, string> pair in ViewBag.StationsData)
+            {
+                <text>
+                        {
+                            marker: {
+                                radius:10
+                            },
+                            name: '@pair.Key',
+                            data: @pair.Value
+
+                        },
+                </text>
+
+
+            }
+        ]
+    });
+});
+
+</script>
+
+                

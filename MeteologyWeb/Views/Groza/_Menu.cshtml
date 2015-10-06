@@ -1,10 +1,12 @@
 ﻿
 @if(ViewBag.currDate != null)
-{ 
+{
+     
         <li id="goto_next">
-            <a class="btn btn-default btn-lg" href="~/Groza/@(ViewContext.Controller.ValueProvider.GetValue("action").RawValue)?YYYY=@ViewBag.currDate.AddDays(-1).Year&MM=@ViewBag.currDate.AddDays(-1).Month&DD=@ViewBag.currDate.AddDays(-1).Day">Пред.</a>
+            <a class="btn btn-default btn-lg" href="~/Groza/@(ViewContext.Controller.ValueProvider.GetValue("action").RawValue)?YYYY=@ViewBag.prevDate.Year&MM=@ViewBag.prevDate.Month&DD=@ViewBag.prevDate.Day">Пред.</a>
         </li>
         <li id="goto_next">
-            <a class="btn btn-default btn-lg" href="~/Groza/@(ViewContext.Controller.ValueProvider.GetValue("action").RawValue)?YYYY=@ViewBag.currDate.AddDays(1).Year&MM=@ViewBag.currDate.AddDays(1).Month&DD=@ViewBag.currDate.AddDays(1).Day">След.</a>
+            <a class="btn btn-default btn-lg" href="~/Groza/@(ViewContext.Controller.ValueProvider.GetValue("action").RawValue)?YYYY=@ViewBag.nextDate.Year&MM=@ViewBag.nextDate.Month&DD=@ViewBag.nextDate.Day">След.</a>
         </li>
+    
 }

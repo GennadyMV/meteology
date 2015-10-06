@@ -140,6 +140,8 @@ namespace MeteologyWeb.Controllers
             }
 
             ViewBag.currDate = currDate;
+            ViewBag.prevDate = currDate.AddMonths(-1);
+            ViewBag.nextDate = currDate.AddMonths(1);
 
             DateTime dateBgn = new DateTime(currDate.Year, currDate.Month, 1);
             DateTime dateEnd = dateBgn.AddMonths(1);
@@ -153,14 +155,14 @@ namespace MeteologyWeb.Controllers
             string theScatterPlus = "";
             foreach (var item in theGrozes)
             {
-                theScatter += "[" + item.Latitude.ToString().Replace(",", ".") + ", " + item.Longitude.ToString().Replace(",", ".") + "], ";
+                theScatter += "[" + item.Longitude.ToString().Replace(",", ".") + ", " + item.Latitude.ToString().Replace(",", ".") + "], ";
                 if (item.Intensity < 0)
                 {
-                    theScatterMinus += "[" + item.Latitude.ToString().Replace(",", ".") + ", " + item.Longitude.ToString().Replace(",", ".") + "], ";
+                    theScatterMinus += "[" + item.Longitude.ToString().Replace(",", ".") + ", " + item.Latitude.ToString().Replace(",", ".") + "], ";
                 }
                 else
                 {
-                    theScatterPlus += "[" + item.Latitude.ToString().Replace(",", ".") + ", " + item.Longitude.ToString().Replace(",", ".") + "], ";
+                    theScatterPlus += "[" + item.Longitude.ToString().Replace(",", ".") + ", " + item.Latitude.ToString().Replace(",", ".") + "], ";
                 }
             }
             theScatter = "[" + theScatter.TrimEnd(trims) + "]";
@@ -174,7 +176,7 @@ namespace MeteologyWeb.Controllers
             foreach (var item in Station.GetAll())
             {
                 theStationsData.Add(item.Name, 
-                    "[[" + item.Latitude.ToString().Replace(",", ".") + ", " + item.Longitude.ToString().Replace(",", ".") + "]] ");
+                    "[[" + item.Longitude.ToString().Replace(",", ".") + ", " + item.Latitude.ToString().Replace(",", ".") + "]] ");
             }
             ViewBag.StationsData = theStationsData;
             return View(theGrozes);

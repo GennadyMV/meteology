@@ -20,6 +20,11 @@ namespace MeteologyWeb.Controllers
             return View(Station.GetAll());
         }
 
+        public ActionResult Map()
+        {
+            return View(Station.GetAll());
+        }
+
         public ActionResult Create()
         {
             return View();
